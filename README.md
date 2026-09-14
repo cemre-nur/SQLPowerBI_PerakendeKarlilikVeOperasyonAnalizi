@@ -23,6 +23,7 @@ Bu proje; çok kanallı bir perakende operasyonunun ciro dinamiklerini, ürün b
 * **Kategori Bazlı Kâr Katkısı (Şelale Grafik - Waterfall):** Kârlılığın ana taşıyıcısının Teknoloji (Technology) kategorisi olduğunun; Ofis Malzemeleri'nin ise kâra en düşük katkıyı sağladığının gösterilmesi.
 * **Müşteri Segmenti Satış Payı (Halka Grafik):** Cironun %42,9'unu oluşturan Kurumsal müşterilerin şirketin ana nakit motoru olduğunun ortaya konması.
 
+<img width="1202" height="677" alt="image" src="https://github.com/user-attachments/assets/3f88c8a1-5d59-401e-a14b-09830366bfd4" />
 
 
 ---
@@ -32,8 +33,9 @@ Bu proje; çok kanallı bir perakende operasyonunun ciro dinamiklerini, ürün b
 * **İndirim ve Kâr Marjı Sağlığı (Dağılım Grafiği - Scatter Chart):** Alt kategorilerde indirim oranı %0-%5 aralığındayken korunan %40-%50 marjların, yüksek indirim uygulanan gruplarda sert biçimde gerilediğinin kanıtlanması.
 * **Bölgesel Sipariş Yoğunluğu (Ağaç Haritası - Treemap):** Sipariş omurgasının Marmara (16) ve Ege (13) bölgelerinde yoğunlaştığının görselleştirilmesi.
 
-<!-- Ekran görüntüsünü yükledikten sonra bu satırı görselinle değiştirebilirsin -->
-> *Sayfa 2 Ekran Görüntüsü Buraya Gelecek*
+<img width="1199" height="675" alt="image" src="https://github.com/user-attachments/assets/09be6644-8ae8-456d-ad5e-593d1cb5c99d" />
+
+
 
 ---
 
@@ -41,8 +43,9 @@ Bu proje; çok kanallı bir perakende operasyonunun ciro dinamiklerini, ürün b
 * **Hiyerarşik Kârlılık Matrisi (Matrix):** Kategori ve ürün bazında Net Ciro, Net Kâr ve Kümülatif Ciro metriklerinin dökümü.
 * **Dinamik Kâr Sıralaması:** `RANKX` motoru ile şirket kârlılığını tek başına sırtlayan amiral ürünlerin (Gaming Masaüstü PC: 1. Sıra, UltraBook Pro 15: 3. Sıra) satır satır teşhis edilmesi.
 
-<!-- Ekran görüntüsünü yükledikten sonra bu satırı görselinle değiştirebilirsin -->
-> *Sayfa 3 Ekran Görüntüsü Buraya Gelecek*
+<img width="1201" height="680" alt="image" src="https://github.com/user-attachments/assets/86fa33c1-f2c9-4a38-86b4-c41f83525627" />
+
+
 
 ---
 
