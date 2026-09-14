@@ -58,14 +58,26 @@ Bu proje; çok kanallı bir perakende operasyonunun ciro dinamiklerini, ürün b
 ### Temel DAX Formülleri
 
 ```dax
-// Ortalama Sepet Büyüklüğü (AOV - Dynamic Iterator)
+// 1. Toplam Net Ciro (Hasılat)
+Total Net Revenue = SUM(vw_SalesAnalytics[NetRevenue])
+
+// 2. Toplam Net Kâr
+Total Net Profit = SUM(vw_SalesAnalytics[NetProfit])
+
+// 3. Tekil Sipariş Hacmi
+Total Orders = DISTINCTCOUNT(vw_SalesAnalytics[SalesID])
+
+// 4. Kâr Marjı Yüzdesi (Güvenli Bölme)
+Profit Margin % = DIVIDE([Total Net Profit], [Total Net Revenue], 0)
+
+// 5. Ortalama Sepet Büyüklüğü (AOV - Dynamic Iterator)
 Avg Order Value = 
 AVERAGEX(
     VALUES(vw_SalesAnalytics[SalesID]),
     [Total Net Revenue]
 )
 
-// Aylık Gelir Büyüme Oranı (Time Intelligence)
+// 6. Aylık Ciro Büyüme Oranı (Time Intelligence)
 MoM Revenue Growth % = 
 VAR PreviousMonthRevenue = 
     CALCULATE(
@@ -75,7 +87,15 @@ VAR PreviousMonthRevenue =
 RETURN
     DIVIDE([Total Net Revenue] - PreviousMonthRevenue, PreviousMonthRevenue, 0)
 
-// Dinamik Ürün Kâr Sıralaması (Ranking Engine)
+// 7. Dinamik Ciro Katkı Payı (Context Transition)
+Revenue Contribution % = 
+DIVIDE(
+    [Total Net Revenue],
+    CALCULATE([Total Net Revenue], ALLSELECTED(vw_SalesAnalytics)),
+    0
+)
+
+// 8. Dinamik Ürün Kâr Sıralaması (Ranking Engine)
 Product Profit Rank = 
 IF(
     ISINSCOPE(vw_SalesAnalytics[ProductName]),
@@ -88,10 +108,26 @@ IF(
     )
 )
 
-// Dinamik Ciro Katkı Payı (Context Transition)
-Revenue Contribution % = 
-DIVIDE(
-    [Total Net Revenue],
-    CALCULATE([Total Net Revenue], ALLSELECTED(vw_SalesAnalytics)),
-    0
-)
+// 9. Kümülatif Ciro (Running Total Engine)
+Cumulative Net Revenue = 
+VAR CurrentRevenue = [Total Net Revenue]
+RETURN
+    CALCULATE(
+        [Total Net Revenue],
+        FILTER(
+            ALL(vw_SalesAnalytics[ProductName]),
+            [Total Net Revenue] >= CurrentRevenue
+        )
+    )
+
+// 10. Teslimat Performans Durumu (Mantıksal Sınıflandırma)
+Delivery Performance Status = 
+VAR AvgDays = AVERAGE(vw_SalesAnalytics[DeliveryDays])
+RETURN
+    SWITCH(
+        TRUE(),
+        ISBLANK(AvgDays), "Bilinmiyor",
+        AvgDays <= 2, "Hızlı Teslimat (≤2 Gün)",
+        AvgDays <= 3, "Standart Teslimat (3 Gün)",
+        "Gecikmeli / Riskli (>3 Gün)"
+    )
